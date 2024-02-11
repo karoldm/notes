@@ -74,11 +74,11 @@ function App() {
   function handleDragEnd(result: any) {
     if (!result.destination) return;
 
-    const newNotes = Array.from(notes);
+    const newNotes = Array.from(initialNotes);
     const [reorderedNotes] = newNotes.splice(result.source.index, 1);
     newNotes.splice(result.destination.index, 0, reorderedNotes);
 
-    setNotes(newNotes);
+    setInitialNotes(newNotes);
     localStorage.setItem('notes', JSON.stringify(newNotes));
   }
 
