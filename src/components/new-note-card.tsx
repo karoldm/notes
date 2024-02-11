@@ -101,11 +101,11 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
               
               { shouldShowOnboarding ? (
                 <p className='text-sm leading-6 text-slate-400'>
-                  Comece 
+                  Comece {' '}
                   <button type="button" onClick={handleStartRecording} className='font-medium text-lime-400 hover:underline'>
                     gravando uma nota
                   </button> 
-                  de ádio ou se preferir 
+                  {' '} de ádio ou se preferir {' '}
                   <button type="button" onClick={handleStartEditor} className='font-medium text-lime-400 hover:underline'>
                     utilize apenas texto.
                   </button>

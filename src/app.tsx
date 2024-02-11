@@ -32,6 +32,18 @@ function App() {
     setNotes(notesArray);
     localStorage.setItem('notes', JSON.stringify(notesArray));
   }
+
+  function onNoteUpdated(id: string, content: string) {
+    const index = notes.findIndex(note => note.id === id);
+    let newNotes = [...notes];
+
+    if(index !== -1){
+      newNotes[index].content = content;
+    }
+
+    setNotes(newNotes);
+    localStorage.setItem('notes', JSON.stringify(newNotes));
+  }
   
   function onNoteDeleted(id: string) {
     const newNotes = notes.filter(note => note.id !== id);
@@ -63,10 +75,6 @@ function App() {
     localStorage.setItem('notes', JSON.stringify(newNotes));
   }
 
-  function handleDragStart() {
-    console.log('dragStart')
-  }
-
   return (
       <div className='mx-auto max-w-6xl my-12 space-y-6 px-5'>
         <img src={logo} alt='nlw expert logo'/>
@@ -80,7 +88,7 @@ function App() {
         </form>
         <div className='h-px bg-slate-700' />
 
-          <DragDropContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
+          <DragDropContext onDragEnd={handleDragEnd}>
             <Droppable droppableId="notes">
               {(provided) => (
                 <ul className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 auto-rows-[250px] gap-6' ref={provided.innerRef} {...provided.droppableProps}>
@@ -93,7 +101,7 @@ function App() {
                           ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         >
                           <MenuIcon className='ml-5 mt-5 text-slate-400' size={18} />
-                          <NoteCard note={note} onNoteDeleted={onNoteDeleted} />
+                          <NoteCard note={note} onNoteDeleted={onNoteDeleted} onNoteUpdated={onNoteUpdated}/>
                         </li>
                       )}
                     </Draggable>
