@@ -1,7 +1,12 @@
 import { ChangeEvent, useState } from 'react';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { MenuIcon } from 'lucide-react'
+
 import logo from './assets/Logo.svg';
+
 import { NewNoteCard } from './components/new-note-card';
 import { NoteCard } from './components/note-card';
+
 import { INote } from './interfaces/Note.interface';
 
 function App() {
@@ -47,28 +52,58 @@ function App() {
     setNotes(filteredNotes);
   }
 
-  return (
-   <div className='mx-auto max-w-6xl my-12 space-y-6 px-5 md:px-0'>
-    <img src={logo} alt='nlw expert logo'/>
-    <form className='w-full'>
-      <input 
-        onChange={handleSearch}
-        type='text' 
-        placeholder='Busque em suas notas...' 
-        className="w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-slate-500"
-      />
-    </form>
-    <div className='h-px bg-slate-700' />
+  function handleDragEnd(result: any) {
+    if (!result.destination) return;
 
-    <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 auto-rows-[250px] gap-6'>
-      <NewNoteCard onNoteCreated={onNoteCreated} />
-      { 
-        notes.map(note => (
-          <NoteCard key={note.id} note={note} onNoteDeleted={onNoteDeleted} />
-        ))
-      }
-    </div>
-   </div>
+    const newNotes = Array.from(notes);
+    const [reorderedNotes] = newNotes.splice(result.source.index, 1);
+    newNotes.splice(result.destination.index, 0, reorderedNotes);
+
+    setNotes(newNotes);
+    localStorage.setItem('notes', JSON.stringify(newNotes));
+  }
+
+  function handleDragStart() {
+    console.log('dragStart')
+  }
+
+  return (
+      <div className='mx-auto max-w-6xl my-12 space-y-6 px-5'>
+        <img src={logo} alt='nlw expert logo'/>
+        <form className='w-full'>
+          <input 
+            onChange={handleSearch}
+            type='text' 
+            placeholder='Busque em suas notas...' 
+            className="w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-slate-500"
+          />
+        </form>
+        <div className='h-px bg-slate-700' />
+
+          <DragDropContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
+            <Droppable droppableId="notes">
+              {(provided) => (
+                <ul className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 auto-rows-[250px] gap-6' ref={provided.innerRef} {...provided.droppableProps}>
+                  <NewNoteCard onNoteCreated={onNoteCreated} />
+                  {notes.map((note, index) => (
+                    <Draggable key={note.id} draggableId={note.id} index={index}>
+                      {(provided, snapshot) => (
+                        <li
+                          className={`rounded-md ${snapshot.isDragging ? 'bg-slate-950' : 'bg-slate-800'} gap-y-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400`}
+                          ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                        >
+                          <MenuIcon className='ml-5 mt-5 text-slate-400' size={18} />
+                          <NoteCard note={note} onNoteDeleted={onNoteDeleted} />
+                        </li>
+                      )}
+                    </Draggable>
+                  ))}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+          
+      </div>
   )
 }
 
