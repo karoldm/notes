@@ -9,16 +9,21 @@ import { NoteCard } from './components/note-card';
 
 import { INote } from './interfaces/Note.interface';
 
-function App() {
-  const [notes, setNotes] = useState<INote[]>(() => {
-    const notesOnStorage = localStorage.getItem('notes');
+function getNotes():INote[] {
+  const notesOnStorage = localStorage.getItem('notes');
 
-    if(notesOnStorage) {
-      return JSON.parse(notesOnStorage);
-    }
-    
-    return []
-  });
+  if(notesOnStorage) {
+    return JSON.parse(notesOnStorage);
+  }
+  
+  return []
+}
+
+const initialNotes = getNotes();
+
+function App() {
+
+  const [notes, setNotes] = useState<INote[]>(initialNotes);
   const [search, setSearch] = useState('');
 
   function onNoteCreated(content: string) {
@@ -51,15 +56,14 @@ function App() {
     localStorage.setItem('notes', JSON.stringify(newNotes));
   }
 
-
   function handleSearch(event: ChangeEvent<HTMLInputElement>){
     const query = event.target.value;
 
     setSearch(query);
 
     const filteredNotes = query !== '' ?
-      notes.filter(note => note.content.toLowerCase().includes(query.toLocaleLowerCase())) :
-      notes
+      initialNotes.filter(note => note.content.toLowerCase().includes(query.toLocaleLowerCase())) :
+      initialNotes
 
     setNotes(filteredNotes);
   }
