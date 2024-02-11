@@ -3,6 +3,10 @@
 
 <div align="left">
 
+<img src="src/assets/Logo.svg" alt="Logo">
+
+<br />
+
 <h3 align="left">NLW Expert - Reactjs</h3>
 
 <p align="left">
@@ -18,7 +22,7 @@ Bloco de notas por texto e áudio com tradução automática para texto
 - [X] Drag and Drop para reordenar notas
 - [X] Filtrar nota por conteúdo     
 
-### [Figma Project][Figma-url]
+* [Figma Project][Figma-url]
 
 <br />
 <br />
@@ -78,7 +82,7 @@ npm run dev
 
 [linkedin-url]: https://linkedin.com/in/karoldm
 
-[Vite]: https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white
+[Vite]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
 
 [Vite-url]: https://vitejs.dev/
 
