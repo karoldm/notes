@@ -86,7 +86,7 @@ npm run dev
 
 [Vite-url]: https://vitejs.dev/
 
-[React]: https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white
+[React]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
 
 [React-url]: https://react.dev/
 
