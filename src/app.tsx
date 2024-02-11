@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ChangeEvent, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { MenuIcon } from 'lucide-react'
@@ -19,12 +20,14 @@ function getNotes():INote[] {
   return []
 }
 
-const initialNotes = getNotes();
-
 function App() {
-
-  const [notes, setNotes] = useState<INote[]>(initialNotes);
+  const [initialNotes, setInitialNotes] = useState<INote[]>(getNotes());
+  const [notes, setNotes] = useState<INote[]>(getNotes());
   const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    setNotes(initialNotes);
+  }, [initialNotes])
 
   function onNoteCreated(content: string) {
     const newNote: INote = {
@@ -34,25 +37,25 @@ function App() {
     }
 
     const notesArray = [newNote, ...notes]
-    setNotes(notesArray);
+    setInitialNotes(previous => [newNote, ...previous]);
     localStorage.setItem('notes', JSON.stringify(notesArray));
   }
 
   function onNoteUpdated(id: string, content: string) {
-    const index = notes.findIndex(note => note.id === id);
-    let newNotes = [...notes];
+    const index = initialNotes.findIndex(note => note.id === id);
+    let newNotes = [...initialNotes];
 
     if(index !== -1){
       newNotes[index].content = content;
     }
-
-    setNotes(newNotes);
+    setInitialNotes(newNotes);
     localStorage.setItem('notes', JSON.stringify(newNotes));
   }
   
   function onNoteDeleted(id: string) {
-    const newNotes = notes.filter(note => note.id !== id);
-    setNotes(newNotes);
+    const newNotes = initialNotes.filter(note => note.id !== id);
+
+    setInitialNotes(newNotes);
     localStorage.setItem('notes', JSON.stringify(newNotes));
   }
 
