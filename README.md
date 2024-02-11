@@ -24,7 +24,7 @@ Bloco de notas por texto e áudio com tradução automática para texto
 
 <br />
 
-*  [![Figma][Figma]][Figma-url]
+*  [Figma][Figma-url]
 
 <br />
 
