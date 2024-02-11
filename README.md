@@ -22,9 +22,10 @@ Bloco de notas por texto e áudio com tradução automática para texto
 - [X] Drag and Drop para reordenar notas
 - [X] Filtrar nota por conteúdo     
 
+<br />
+
 * [Figma Project][Figma-url]
 
-<br />
 <br />
 
 ###  Built With
