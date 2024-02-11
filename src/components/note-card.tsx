@@ -13,7 +13,7 @@ interface NoteCardProps {
 export function NoteCard({note, onNoteDeleted}: NoteCardProps) {
   return (
     <Dialog.Root>
-      <Dialog.Trigger className='text-left p-5 outline-none w-full flex flex-col'>
+      <Dialog.Trigger className='text-left p-5 outline-none flex-1 flex flex-col'>
         
         <span className='text-sm font-medium text-slate-300' >
           {formatDistanceToNow(note.createdAt, {locale: ptBR, addSuffix: true})}

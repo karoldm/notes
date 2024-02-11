@@ -89,7 +89,7 @@ function App() {
                     <Draggable key={note.id} draggableId={note.id} index={index}>
                       {(provided, snapshot) => (
                         <li
-                          className={`rounded-md ${snapshot.isDragging ? 'bg-slate-950' : 'bg-slate-800'} gap-y-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400`}
+                          className={`rounded-md ${snapshot.isDragging ? 'bg-slate-950' : 'bg-slate-800'} flex flex-col gap-y-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400`}
                           ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                         >
                           <MenuIcon className='ml-5 mt-5 text-slate-400' size={18} />
