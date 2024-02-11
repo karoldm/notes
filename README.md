@@ -97,8 +97,6 @@ npm run dev
 
 [Figma-url]: https://www.figma.com/community/file/1336456128647909148
 
-[Figma]: https://cdn-icons-png.flaticon.com/512/5968/5968705.png
-
 [React-beatiful-dnd-url]: https://github.com/atlassian/react-beautiful-dnd
 
 [Radix-ui-url]: https://www.radix-ui.com/
