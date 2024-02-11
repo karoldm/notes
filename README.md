@@ -24,7 +24,7 @@ Bloco de notas por texto e áudio com tradução automática para texto
 
 <br />
 
-* [Figma Project][Figma-url]
+*  [![Figma][Figma]][Figma-url]
 
 <br />
 
@@ -95,7 +95,7 @@ npm run dev
 
 [Tailwind-url]: https://tailwindcss.com/
 
-[Figma-url]: [https://www.figma.com/file/Knnqcp8DQxTJs8kyI3tHVT/myplants?node-id=216%3A2](https://www.figma.com/community/file/1336456128647909148)
+[Figma-url]: https://www.figma.com/community/file/1336456128647909148
 
 [Figma]: https://cdn-icons-png.flaticon.com/512/5968/5968705.png
 
